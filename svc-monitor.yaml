@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    app: sensebox
+  labels:
+    release: prometheus-stack
+    meta.helm.sh/release-name: sensebox
+    meta.helm.sh/release-namespace: food-app
+  name: sensebox-metrics
+  namespace: food-app
+spec:
+  endpoints:
+    - port: http-metrics
+  namespaceSelector:
+    matchNames:
+      - food-app
+  selector:
+    matchLabels:
+      app: sensebox
+
